@@ -99,9 +99,10 @@ class extLerntutorenModelTutoren
         $slots = $this->getSlots();
         $diff = 0;
         foreach ($slots as $item) {
-            if ( $item->isStatusFinish() ) {
+            if ( !$item->isStatusAbort() ) {
                 $diff += (int)$item->getEinheiten();
             }
+
         }
         return (int)$this->getEinheiten() - $diff;
     }

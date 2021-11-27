@@ -73,17 +73,17 @@ class extLerntutorenModelSlot
         return $this->schueler;
     }
 
-    public function isStatusFinish () {
-        if ( $this->getStatus() == 'close' ) {
+    public function isStatusAbort () {
+        if ( $this->getStatus() == 'abort' ) {
             return true;
         }
         return false;
     }
 
-    public function setStatusClose () {
+    public function setStatusAbort () {
 
         if ( $this->getID() ) {
-            if ( DB::getDB()->query("UPDATE tutoren_slots SET slotStatus='close', slotInfo='(Systemnachricht) Lerntutor beendet' WHERE slotID=".$this->getID() ) ) {
+            if ( DB::getDB()->query("UPDATE tutoren_slots SET slotStatus='abort', slotInfo='Abgebrochen' WHERE slotID=".$this->getID() ) ) {
                 return true;
             }
         }

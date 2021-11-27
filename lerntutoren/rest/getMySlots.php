@@ -1,34 +1,39 @@
 <?php
 
-class getList extends AbstractRest {
+class getMySlots extends AbstractRest {
 	
 	protected $statusCode = 200;
 
 
 	public function execute($input, $request) {
 
+        $selfUser = DB::getSession()->getUser();
+
+        if (!$selfUser->getData('userAsvID')) {
+            return [
+                'error' => true,
+                'msg' => 'Sie haben keine ASV ID.'
+            ];
+        }
+
         include_once PATH_EXTENSION . 'models' . DS . 'Slot.class.php';
         include_once PATH_EXTENSION . 'models' . DS . 'Tutoren.class.php';
 
         $ret = [];
-        $items = extLerntutorenModelTutoren::getAllByStatus('open');
+        $items = extLerntutorenModelTutoren::getAllByTutor($selfUser);
 
         foreach ($items as $item) {
 
-            $diff = $item->getSlotsDiff();
-            if ($diff > 0) {
-                $ret[] = [
-                    "id" => $item->getID(),
-                    "fach" => $item->getFach(),
-                    "jahrgang" => $item->getJahrgang(),
-                    "einheiten" => $item->getEinheiten(),
-                    "status" => $item->getStatus(),
-                    "user" => $item->getTutor()->getCollection(),
-                    "slots" => $item->getSlotsCollection(),
-                    "diff" => $diff
-                ];
-            }
-
+            $ret[] = [
+                "id" => $item->getID(),
+                "fach" => $item->getFach(),
+                "jahrgang" => $item->getJahrgang(),
+                "einheiten" => $item->getEinheiten(),
+                "status" => $item->getStatus(),
+                "user" => $item->getTutor()->getCollection(),
+                "slots" => $item->getSlotsCollection(),
+                "diff" => $item->getSlotsDiff()
+            ];
 
         }
 

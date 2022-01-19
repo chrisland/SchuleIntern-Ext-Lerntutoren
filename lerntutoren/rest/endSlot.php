@@ -17,10 +17,13 @@ class endSlot extends AbstractRest {
             ];
         }
 
+        $datum = $input['datum'] ? DB::getDB()->escapeString($input['datum']) : '';
+        $dauer = $input['dauer'] ? DB::getDB()->escapeString($input['dauer']) : '';
+        $info = $input['info'] ? DB::getDB()->escapeString($input['info']) : '';
         if ( DB::getDB()->query("UPDATE tutoren_slots SET 
-                         slotDatum='" . DB::getDB()->escapeString($input['datum']) . "'
-                         , slotDauer='" . DB::getDB()->escapeString($input['dauer']) . "'  
-                         , slotInfo='" . DB::getDB()->escapeString($input['info']) . "'
+                         slotDatum='" .$datum. "'
+                         , slotDauer='" .$dauer. "'  
+                         , slotInfo='" .$info. "'
                          , slotStatus='close'
                         WHERE slotID='" . $itemID . "'") ) {
             return [

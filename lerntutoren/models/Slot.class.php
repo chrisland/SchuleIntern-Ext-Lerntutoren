@@ -63,7 +63,10 @@ class extLerntutorenModelSlot
         return $this->data['slotDauer'];
     }
     public function getInfo() {
-        return $this->data['slotInfo'];
+        if ($this->data['slotInfo'] != 'null') {
+            return $this->data['slotInfo'];
+        }
+        return '';
     }
 
     public function getSchueler () {

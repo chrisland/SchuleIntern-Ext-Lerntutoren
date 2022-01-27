@@ -1,13 +1,26 @@
-CREATE TABLE IF NOT EXISTS `ext_example_a` (
-   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-   `test` int(11) DEFAULT NULL,
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tutoren` (
+                           `tutorenID` int(11) NOT NULL AUTO_INCREMENT,
+                           `status` varchar(100) DEFAULT NULL,
+                           `created` date DEFAULT NULL,
+                           `tutorenTutorAsvID` varchar(100) DEFAULT NULL,
+                           `fach` varchar(100) DEFAULT NULL,
+                           `jahrgang` varchar(100) DEFAULT NULL,
+                           `einheiten` int(11) DEFAULT NULL,
+                           PRIMARY KEY (`tutorenID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 
-CREATE TABLE IF NOT EXISTS `ext_example_b` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `test` int(11) DEFAULT NULL,
-   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `tutoren_slots` (
+                                 `slotID` int(11) NOT NULL AUTO_INCREMENT,
+                                 `slotTutorenID` int(11) NOT NULL,
+                                 `slotStatus` varchar(255) NOT NULL,
+                                 `slotSchuelerAsvID` varchar(100) NOT NULL,
+                                 `slotEinheiten` int(11) NOT NULL,
+                                 `slotCreated` date DEFAULT NULL,
+                                 `slotDatum` varchar(255) DEFAULT '',
+                                 `slotDauer` varchar(255) DEFAULT '',
+                                 `slotInfo` text,
+                                 PRIMARY KEY (`slotID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 

@@ -11,24 +11,26 @@
             <td>Status</td>
             <td>Einheiten</td>
             <td>Schueler</td>
-            <td>Info</td>
-            <td>Erstellt</td>
+            <td>Termine</td>
             <td></td>
           </tr>
         </thead>
         <tbody>
-          <tr v-bind:key="index" v-for="(item, index) in  data"
-            class="">
+          <tr v-bind:key="index" v-for="(item, index) in  data" class="">
             <td>
               <i v-if="item.status == 'close'" class="fas fa-times-circle text-red"></i>
               <i v-if="item.status == 'reserve'" class="fas fa-check-circle text-green"></i>
             </td>
             <td>{{item.einheiten}}</td>
             <td><User v-if="item.user" v-bind:data="item.user" size="line"></User></td>
-            <td>{{item.info}}</td>
-            <td>{{item.timeCreated}}</td>
-            <td>
-              <button v-if="item.status == 'reserve'" class="si-btn" v-on:click="handlerShow(item)"><i class="fa fa-user-check"></i> Bestätigen</button>
+            <td v-if="item.status == 'close'">
+              <div v-bind:key="i" v-for="(date, i) in  item.dates" class="">
+                {{date.date}} <span v-if="date.duration">({{date.duration}}min)</span></div>
+              <br>
+              <span class="text-small">{{item.info}}</span>
+            </td>
+            <td v-if="item.status == 'reserve'">
+              <button  class="si-btn" v-on:click="handlerShow(item)"><i class="fa fa-user-check"></i> Final Abschließen</button>
             </td>
           </tr>
         </tbody>

@@ -72,9 +72,10 @@ export default {
 
       const formData = new FormData();
       formData.append('id', data.data.id);
-      formData.append('dauer', data.data.dauer);
-      formData.append('datum', data.data.datum);
+      //formData.append('dauer', data.data.dauer);
+      //formData.append('datum', data.data.datum);
       formData.append('info', data.data.info);
+      formData.append('dates', data.data.dates);
 
       this.loading = true;
       var that = this;

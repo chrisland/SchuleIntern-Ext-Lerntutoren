@@ -56,11 +56,8 @@ class extLerntutorenModelSlot
     public function getTimeCreated() {
         return $this->data['slotCreated'];
     }
-    public function getDatum() {
-        return $this->data['slotDatum'];
-    }
-    public function getDauer() {
-        return $this->data['slotDauer'];
+    public function getDates() {
+        return $this->data['slotDates'];
     }
     public function getInfo() {
         if ($this->data['slotInfo'] != 'null') {
@@ -99,6 +96,7 @@ class extLerntutorenModelSlot
             "status" => $this->getStatus(),
             "einheiten" => $this->getEinheiten(),
             "info" => $this->getInfo(),
+            "dates" => json_decode($this->getDates()),
             "timeCreated" => $this->getTimeCreated(),
             "user" => $this->getSchueler()->getCollection()
         ];

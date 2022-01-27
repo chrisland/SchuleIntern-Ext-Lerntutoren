@@ -8,6 +8,7 @@ class endSlot extends AbstractRest {
 	public function execute($input, $request) {
 
         //print_r($input);
+        //exit;
 
         $itemID = (int)$input['id'];
         if (!$itemID) {
@@ -17,12 +18,14 @@ class endSlot extends AbstractRest {
             ];
         }
 
-        $datum = $input['datum'] ? DB::getDB()->escapeString($input['datum']) : '';
-        $dauer = $input['dauer'] ? DB::getDB()->escapeString($input['dauer']) : '';
+        //$datum = $input['datum'] ? DB::getDB()->escapeString($input['datum']) : '';
+        //$dauer = $input['dauer'] ? DB::getDB()->escapeString($input['dauer']) : '';
         $info = $input['info'] ? DB::getDB()->escapeString($input['info']) : '';
+        $dates = $input['dates'] ? DB::getDB()->escapeString($_POST['dates']) : '';
+
+
         if ( DB::getDB()->query("UPDATE tutoren_slots SET 
-                         slotDatum='" .$datum. "'
-                         , slotDauer='" .$dauer. "'  
+                         slotDates='" .$dates. "'  
                          , slotInfo='" .$info. "'
                          , slotStatus='close'
                         WHERE slotID='" . $itemID . "'") ) {

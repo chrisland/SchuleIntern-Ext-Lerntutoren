@@ -25,6 +25,13 @@ class extLerntutorenAdminCustom extends AbstractPage {
             ],
             "data" => [
                 "apiURL" => "rest.php/lerntutoren"
+            ],
+            "dropdown" => [
+                [
+                    "url" => "index.php?page=ext_lerntutoren&view=custom&admin=true&task=exportExel",
+                    "title" => "Export Exel",
+                    "icon" => "fas fa-print"
+                ]
             ]
         ]);
 

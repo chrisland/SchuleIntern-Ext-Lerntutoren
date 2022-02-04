@@ -98,8 +98,11 @@ class extLerntutorenModelSlot
             "info" => $this->getInfo(),
             "dates" => json_decode($this->getDates()),
             "timeCreated" => $this->getTimeCreated(),
-            "user" => $this->getSchueler()->getCollection()
+            "user" => false
         ];
+        if ($this->getSchueler()) {
+            $collection['user'] = $this->getSchueler()->getCollection();
+        }
         return $collection;
     }
 

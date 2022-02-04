@@ -18,18 +18,22 @@
         <tbody>
           <tr v-bind:key="index" v-for="(item, index) in  data" class="">
             <td>
-              <i v-if="item.status == 'close'" class="fas fa-times-circle text-red"></i>
+              <i v-if="item.status == 'finish'" class="fas fa-times-circle text-red"></i>
+              <i v-if="item.status == 'close'" class="fas fa-exclamation-circle text-green"></i>
               <i v-if="item.status == 'reserve'" class="fas fa-check-circle text-green"></i>
             </td>
             <td>{{item.einheiten}}</td>
             <td><User v-if="item.user" v-bind:data="item.user" size="line"></User></td>
-            <td v-if="item.status == 'close'">
+            <td v-if="item.status == 'finish'">
               <div v-bind:key="i" v-for="(date, i) in  item.dates" class="">
                 {{date.date}} <span v-if="date.duration">({{date.duration}}min)</span></div>
               <br>
               <span class="text-small">{{item.info}}</span>
             </td>
             <td v-if="item.status == 'reserve'">
+              <button  class="si-btn" v-on:click="handlerShow(item)"><i class="fa fa-user-check"></i> Final Abschließen</button>
+            </td>
+            <td v-if="item.status == 'close'">
               <button  class="si-btn" v-on:click="handlerShow(item)"><i class="fa fa-user-check"></i> Final Abschließen</button>
             </td>
           </tr>

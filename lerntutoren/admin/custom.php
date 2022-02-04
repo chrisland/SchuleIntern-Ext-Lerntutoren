@@ -1,21 +1,21 @@
 <?php
 
 class extLerntutorenAdminCustom extends AbstractPage {
-	
-	public static function getSiteDisplayName() {
-		return '<i class="fa fa-graduation-cap"></i> Verfügbare Lerntutoren - Admin';
-	}
 
-	public function __construct($request = [], $extension = []) {
-		parent::__construct(array( self::getSiteDisplayName() ), false, false, false, $request, $extension);
-		$this->checkLogin();
-	}
+    public static function getSiteDisplayName() {
+        return '<i class="fa fa-graduation-cap"></i> Verfügbare Lerntutoren - Admin';
+    }
+
+    public function __construct($request = [], $extension = []) {
+        parent::__construct(array( self::getSiteDisplayName() ), false, false, false, $request, $extension);
+        $this->checkLogin();
+    }
 
 
-	public function execute() {
+    public function execute() {
 
-		//$request = $this->getRequest();
-		//$this->getAcl();
+        //$request = $this->getRequest();
+        //$this->getAcl();
 
 
         $this->render([
@@ -35,7 +35,7 @@ class extLerntutorenAdminCustom extends AbstractPage {
             ]
         ]);
 
-	}
+    }
 
     public function taskExportExel() {
 
@@ -74,8 +74,12 @@ class extLerntutorenAdminCustom extends AbstractPage {
         $excelFile->getActiveSheet()->getStyle("J1")->getFont()->setBold(true);
         $excelFile->setActiveSheetIndex(0)->setCellValue("K1", 'Einheiten');
         $excelFile->getActiveSheet()->getStyle("K1")->getFont()->setBold(true);
-        $excelFile->setActiveSheetIndex(0)->setCellValue("M1", 'Info');
-        $excelFile->getActiveSheet()->getStyle("M1")->getFont()->setBold(true);
+        $excelFile->setActiveSheetIndex(0)->setCellValue("L1", 'Info');
+        $excelFile->getActiveSheet()->getStyle("L1")->getFont()->setBold(true);
+        $excelFile->setActiveSheetIndex(0)->setCellValue("N1", 'Datum');
+        $excelFile->getActiveSheet()->getStyle("N1")->getFont()->setBold(true);
+        $excelFile->setActiveSheetIndex(0)->setCellValue("O1", 'Dauer in min');
+        $excelFile->getActiveSheet()->getStyle("O1")->getFont()->setBold(true);
 
         $i = 2;
         foreach ($items as $item) {
@@ -92,10 +96,20 @@ class extLerntutorenAdminCustom extends AbstractPage {
 
                 $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(7,$i, $slot['id']);
                 $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(8,$i, $slot['status']);
-                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,$i, $slot['user']['name']);
-                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,$i, $slot['einheiten']);
-                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,$i, $slot['info']);
+                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(9,$i, $slot['user']['name'].' ('.$slot['user']['klasse'].')');
+                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(10,$i, $slot['einheiten']);
+                $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(11,$i, $slot['info']);
+                //$excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(12,$i, json_encode($slot['dates']));
+
+                foreach ($slot['dates'] as $date) {
+                    $i++;
+
+                    $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(13,$i, $date->date);
+                    $excelFile->setActiveSheetIndex(0)->setCellValueByColumnAndRow(14,$i, $date->duration);
+                }
+
             }
+            $i++;
             $i++;
         }
 

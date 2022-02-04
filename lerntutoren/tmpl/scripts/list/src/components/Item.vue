@@ -81,7 +81,8 @@ export default {
 
       EventBus.$emit('item-submit', {
         einheiten: this.formEinheiten,
-        id: this.data.id
+        id: this.data.id,
+        tutorUserID: this.data.user.id
       });
     }
 

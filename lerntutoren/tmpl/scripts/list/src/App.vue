@@ -89,8 +89,13 @@ export default {
             //that.list = response.data;
             //console.log(response.data.error);
             if (response.data.error == false) {
+
               that.loadList();
               that.selectedItem = false;
+              if (data.tutorUserID) {
+                window.location = "index.php?page=MessageCompose&recipient=U:"+data.tutorUserID;
+              }
+
             } else {
               that.error = ''+response.data.msg;
             }

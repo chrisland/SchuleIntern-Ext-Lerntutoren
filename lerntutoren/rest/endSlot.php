@@ -27,7 +27,7 @@ class endSlot extends AbstractRest {
         if ( DB::getDB()->query("UPDATE tutoren_slots SET 
                          slotDates='" .$dates. "'  
                          , slotInfo='" .$info. "'
-                         , slotStatus='close'
+                         , slotStatus='finish'
                         WHERE slotID='" . $itemID . "'") ) {
             return [
                 'error' => false

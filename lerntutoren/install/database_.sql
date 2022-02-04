@@ -1,4 +1,4 @@
-
+/*
 CREATE TABLE `tutoren` (
                            `tutorenID` int(11) NOT NULL AUTO_INCREMENT,
                            `status` varchar(100) DEFAULT NULL,
@@ -23,4 +23,4 @@ CREATE TABLE `tutoren_slots` (
                                  `slotInfo` text,
                                  PRIMARY KEY (`slotID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-
+*/

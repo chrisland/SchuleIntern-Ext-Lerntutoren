@@ -42,11 +42,14 @@ class getList extends AbstractRest {
         if (count($ret) > 0) {
             return $ret;
         }
+        return [];
 
+        /*
         return [
-            'error' => true,
+            'error' => false,
             'msg' => 'Error'
         ];
+        */
 
 	}
 

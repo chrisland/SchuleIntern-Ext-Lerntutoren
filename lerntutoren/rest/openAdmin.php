@@ -17,6 +17,14 @@ class openAdmin extends AbstractRest {
             ];
         }
 
+        //$acl = $this->getAcl();
+        if ( (int)DB::getSession()->getUser()->isAnyAdmin() !== 1 ) {
+            return [
+                'error' => true,
+                'msg' => 'Kein Zugriff'
+            ];
+        }
+
         include_once PATH_EXTENSION . 'models' . DS . 'Tutoren.class.php';
 
         $tutor = new extLerntutorenModelTutoren(["tutorenID" => $itemID]);
@@ -61,7 +69,7 @@ class openAdmin extends AbstractRest {
      */
     public function needsAdminAuth()
     {
-        return true;
+        return false;
     }
 	/**
 	 * Ist eine System Authentifizierung nötig? (mit API key)

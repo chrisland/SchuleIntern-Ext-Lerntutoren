@@ -48,10 +48,13 @@ class getMySlots extends AbstractRest {
             return $ret;
         }
 
+        return [];
+        /*
         return [
             'error' => true,
             'msg' => 'Error'
         ];
+        */
 
 	}
 

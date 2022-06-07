@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-bind:key="index" v-for="(item, index) in  list"
+        <tr v-if="list && list.length >= 1" v-bind:key="index" v-for="(item, index) in  list"
           class="">
           <td>
             <i v-if="item.status == 'closed'" class="fas fa-times-circle text-red"></i>
@@ -28,6 +28,9 @@
           <td>{{item.fach}}</td>
           <td>noch {{item.diff}} von {{item.einheiten}}</td>
           <td><Item v-if="item.slots" v-bind:data="item.slots"></Item></td>
+        </tr>
+        <tr v-if="list.length == 0">
+          <td colspan="5"> - keine Inhalte vorhanden -</td>
         </tr>
       </tbody>
     </table>
@@ -117,10 +120,10 @@ export default {
       axios.get( this.apiURL+'/getMySlots')
       .then(function(response){
         if ( response.data ) {
-          if (!response.data.error) {
-            that.list = response.data;
-          } else {
+          if (response.data.error) {
             that.error = ''+response.data.msg;
+          } else {
+            that.list = response.data;
           }
         } else {
           that.error = 'Fehler beim Laden. 01';

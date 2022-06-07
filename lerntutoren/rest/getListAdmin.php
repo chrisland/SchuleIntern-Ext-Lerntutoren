@@ -9,6 +9,14 @@ class getListAdmin extends AbstractRest
     public function execute($input, $request)
     {
 
+        //$acl = $this->getAcl();
+        if ( (int)DB::getSession()->getUser()->isAnyAdmin() !== 1 ) {
+            return [
+                'error' => true,
+                'msg' => 'Kein Zugriff'
+            ];
+        }
+
         include_once PATH_EXTENSION . 'models' . DS . 'Slot.class.php';
         include_once PATH_EXTENSION . 'models' . DS . 'Tutoren.class.php';
 
@@ -31,20 +39,25 @@ class getListAdmin extends AbstractRest
         }
 
 
-        /*
+/*
         echo '<pre>';
         print_r($items);
         echo '</pre>';
-        exit;*/
-
+        exit;
+*/
         if (count($ret) > 0) {
             return $ret;
         }
 
+
+        return [];
+
+        /*
         return [
             'error' => true,
             'msg' => 'Error'
         ];
+        */
 
     }
 
@@ -77,7 +90,7 @@ class getListAdmin extends AbstractRest
      */
     public function needsAdminAuth()
     {
-        return true;
+        return false;
     }
 
     /**

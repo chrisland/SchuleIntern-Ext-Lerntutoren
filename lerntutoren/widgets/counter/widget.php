@@ -13,10 +13,13 @@ class extLerntutorenWidgetCounter extends Widget
     }
 
     public function render() {
-        return '<a href="index.php?page=ext_lerntutoren&view=custom&admin=true" class="btn">
-                 <i class="fa fa-graduation-cap"></i>
-                 <span class="label bg-red">'.$this->getCount().'</span>
-             </a>';
+        $count = $this->getCount();
+        $html = '<a href="index.php?page=ext_lerntutoren&view=custom&admin=true" class="btn"><i class="fa fa-graduation-cap"></i>';
+        if ($count) {
+            $html .= '<span class="label bg-red">'.$count.'</span>';
+        }
+        $html .= '</a>';
+        return $html;
     }
 
 }

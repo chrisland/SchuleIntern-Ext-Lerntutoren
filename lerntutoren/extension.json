@@ -1,7 +1,7 @@
 {
   "name": "Lerntutoren",
   "uniqid": "ext.zwiebelgasse.lerntutoren",
-  "version": "9",
+  "version": "10",
 
   "requiredVersion": "1.4.0",
 
@@ -54,6 +54,18 @@
       }
     },
 
+    {
+      "admin": true,
+      "title": "ACL",
+      "icon": "fa fa-cog",
+      "url": {
+        "page": "ext_lerntutoren",
+        "params": {
+          "view": "acl",
+          "admin": "true"
+        }
+      }
+    },
     {
       "admin": true,
       "title": "Einstellungen",

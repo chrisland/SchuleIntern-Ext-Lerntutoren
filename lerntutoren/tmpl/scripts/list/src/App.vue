@@ -9,7 +9,6 @@
 
     <div class="si-hinweis" v-if="LANG_disclaimer" v-html="LANG_disclaimer"></div>
 
-
     <table class="si-table">
       <thead>
         <tr>
@@ -21,13 +20,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-bind:key="index" v-for="(item, index) in  list"
+        <tr v-if="list && list.length >= 1" v-bind:key="index" v-for="(item, index) in  list"
           class="">
           <td><User v-bind:data="item.user"></User></td>
           <td>{{item.jahrgang}}</td>
           <td>{{item.fach}}</td>
           <td>{{item.diff}}</td>
           <td><button class="si-btn" v-on:click="handlerShow(item)"><i class="fa fa-file"></i>Anzeigen</button></td>
+        </tr>
+        <tr v-if="list.length == 0">
+          <td colspan="5"> - keine Inhalte vorhanden -</td>
         </tr>
       </tbody>
     </table>
@@ -123,10 +125,10 @@ export default {
       axios.get( this.apiURL+'/getList')
       .then(function(response){
         if ( response.data ) {
-          if (!response.data.error) {
-            that.list = response.data;
-          } else {
+          if ( response.data.error ) {
             that.error = ''+response.data.msg;
+          } else {
+            that.list = response.data;
           }
         } else {
           that.error = 'Fehler beim Laden. 01';

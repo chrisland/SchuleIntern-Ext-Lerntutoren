@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-bind:key="index" v-for="(item, index) in  list"
+        <tr v-if="list && list.length >= 1" v-bind:key="index" v-for="(item, index) in  list"
           class="">
           <td><User v-if="item.user" v-bind:data="item.user"></User></td>
           <td>
@@ -36,6 +36,9 @@
             <button v-if="item.status != 'closed'" class="si-btn si-btn-light" v-on:click="handlerClose(item)"><i class="fas fa-power-off"></i>Abbrechen</button>
           </td>
 
+        </tr>
+        <tr v-if="list.length == 0">
+          <td colspan="7"> - keine Inhalte vorhanden -</td>
         </tr>
 
       </tbody>
@@ -77,47 +80,6 @@ export default {
 
   },
   mounted() {
-
-/*
-
-    EventBus.$on('item-submit', data => {
-      //console.log(data)
-
-      const formData = new FormData();
-      formData.append('id', data.id);
-      formData.append('einheiten', data.einheiten);
-
-      this.loading = true;
-      var that = this;
-      axios.post( this.apiURL+'/orderSlot', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(function(response){
-          if ( response.data ) {
-            //that.list = response.data;
-            //console.log(response.data.error);
-            if (response.data.error == false) {
-              that.loadList();
-              that.selectedItem = false;
-            } else {
-              that.error = ''+response.data.msg;
-            }
-          } else {
-            that.error = 'Fehler beim Laden. 01';
-          }
-        })
-        .catch(function(){
-          that.error = 'Fehler beim Laden. 02';
-        })
-        .finally(function () {
-          // always executed
-          that.loading = false;
-        });
-
-    });
-*/
 
   },
   methods: {
@@ -194,10 +156,10 @@ export default {
       axios.get( this.apiURL+'/getListAdmin')
       .then(function(response){
         if ( response.data ) {
-          if (!response.data.error) {
-            that.list = response.data;
-          } else {
+          if (response.data.error) {
             that.error = ''+response.data.msg;
+          } else {
+            that.list = response.data;
           }
         } else {
           that.error = 'Fehler beim Laden. 01';

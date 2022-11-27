@@ -44,6 +44,8 @@ class extLerntutorenAdminCustom extends AbstractPage {
 
         $items = extLerntutorenModelTutoren::getAllByStatus();
 
+        include_once('../framework/lib/phpexcel/PHPExcel.php');
+
         $excelFile = new PHPExcel();
         $today = date('d_m_Y', time() );
 

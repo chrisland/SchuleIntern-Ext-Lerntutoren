@@ -16,11 +16,23 @@
 
   "widgets": [
     {
-      "title": "Header Counter",
+      "title": "Anzahl Freigaben",
       "uniqid": "lerntutoren.counter",
       "position": "header",
       "class": "extLerntutorenWidgetCounter",
-      "params": {}
+      "params": {
+        "minH": 1,
+        "minW": 2
+      }
+    },
+    {
+      "title": "Freigaben",
+      "uniqid": "lerntutoren.freigaben",
+      "position": "dashboard",
+      "params": {
+        "minH": 2,
+        "minW": 4
+      }
     }
   ],
 

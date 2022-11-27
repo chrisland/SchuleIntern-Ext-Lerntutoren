@@ -159,7 +159,7 @@ class extLerntutorenModelTutoren
         return $ret;
     }
 
-    
+
     /**
      * @param $tutor user
      * @return Array[]

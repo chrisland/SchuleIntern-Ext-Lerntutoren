@@ -17,16 +17,21 @@ class getList extends AbstractRest {
 
             $diff = $item->getSlotsDiff();
             if ($diff > 0) {
-                $ret[] = [
+                $arr = [
                     "id" => $item->getID(),
                     "fach" => $item->getFach(),
                     "jahrgang" => $item->getJahrgang(),
                     "einheiten" => $item->getEinheiten(),
                     "status" => $item->getStatus(),
-                    "user" => $item->getTutor()->getCollection(),
+                    //"user" => $item->getTutor() ? $item->getTutor()->getCollection(),
                     "slots" => $item->getSlotsCollection(),
                     "diff" => $diff
                 ];
+                $user = $item->getTutor();
+	            if ($user) {
+		            $arr['user'] = $user->getCollection();
+	            }
+	            $ret[] = $arr;
             }
 
 

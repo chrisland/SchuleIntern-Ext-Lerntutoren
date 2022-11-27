@@ -25,16 +25,24 @@ class getListAdmin extends AbstractRest
 
         foreach ($items as $item) {
 
-            $ret[] = [
+
+            $arr = [
                 "id" => $item->getID(),
                 "fach" => $item->getFach(),
                 "jahrgang" => $item->getJahrgang(),
                 "einheiten" => $item->getEinheiten(),
                 "status" => $item->getStatus(),
-                "user" => $item->getTutor()->getCollection(),
+                "user" => false,
                 "slots" => $item->getSlotsCollection(),
                 "diff" => $item->getSlotsDiff()
+                
             ];
+            $user = $item->getTutor();
+            if ($user) {
+	            $arr['user'] = $user->getCollection();
+            }
+            
+            $ret[] = $arr;
 
         }
 
